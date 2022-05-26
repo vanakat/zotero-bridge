@@ -1,6 +1,6 @@
 {
 	"id": "obsidian-zotero",
-	"name": "Zotero integration plugin",
+	"name": "Zotero",
 	"version": "1.0.0",
 	"minAppVersion": "0.12.0",
 	"description": "Zotero integration",

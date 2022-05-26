@@ -1,35 +1,29 @@
 
-import { App, Notice, SuggestModal } from 'obsidian';
+import { App, Editor, SuggestModal } from 'obsidian';
+import Zotero from './Zotero';
+import { ZoteroItem } from './ZoteroItem';
 
-interface Reference {
-    key: string;
-    title: string;
-    itemType: string;
-}
+export class ZoteroSearchModal extends SuggestModal<ZoteroItem> {
 
-export class ZoteroSearchModal extends SuggestModal<Reference> {
+    zotero: Zotero;
+    editor: Editor;
 
-    zotero: any;
-
-    constructor(app: App, zotero: any) {
+    constructor(app: App, zotero: Zotero, editor: Editor) {
         super(app);
         this.zotero = zotero;
+        this.editor = editor;
     }
 
-
-    getSuggestions(query: string): Reference[] {
-        this.zotero.searchEverything(query).then(console.log)
+    getSuggestions(query: string): Promise<ZoteroItem[]> {
         return this.zotero.searchEverything(query);
     }
 
-    // Renders each suggestion item.
-    renderSuggestion(book: Reference, el: HTMLElement) {
-        el.createEl('div', { text: book.title });
-        el.createEl('small', { text: book.key });
+    renderSuggestion(item: ZoteroItem, el: HTMLElement) {
+        el.createEl('div', { text: item.getTitle() });
+        el.createEl('small', { text: item.getKey() });
     }
 
-    // Perform action on the selected suggestion.
-    onChooseSuggestion(book: Reference, evt: MouseEvent | KeyboardEvent) {
-        new Notice(`Selected ${book.title}`);
+    onChooseSuggestion(item: ZoteroItem) {
+        this.editor.replaceRange(`[${item.getTitle()}](zotero://select/library/items/${item.getKey()})`, this.editor.getCursor());
     }
 }
