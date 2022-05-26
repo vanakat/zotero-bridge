@@ -25,6 +25,11 @@ Please refer to following helpful resources:
 * [ZotServer repository](https://github.com/MunGell/ZotServer) for documentation on API
 * [Zotero search API code](https://github.com/zotero/zotero/blob/master/chrome/content/zotero/xpcom/data/search.js) for the most up-to-date search API documentation
 
+## Other Zotero integration plugins
+
+While working on this plugin I found another Zotero integration one called [Zotero Integration](https://github.com/mgmeyers/obsidian-zotero-integration).
+If you are looking for a citation/bibliography integration with Zotero it might be a good option for you.
+
 ## License
 
 MIT
