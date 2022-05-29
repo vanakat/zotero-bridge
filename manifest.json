@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-zotero",
 	"name": "Zotero",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"minAppVersion": "0.12.0",
 	"description": "Zotero integration",
 	"author": "Shmavon Gazanchyan",
