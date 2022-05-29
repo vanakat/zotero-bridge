@@ -1,21 +1,21 @@
 
 import { App, Editor, SuggestModal } from 'obsidian';
-import Zotero from './Zotero';
+import { ZoteroConnector } from './ZoteroConnector';
 import { ZoteroItem } from './ZoteroItem';
 
 export class ZoteroSearchModal extends SuggestModal<ZoteroItem> {
 
-    zotero: Zotero;
+    connector: ZoteroConnector;
     editor: Editor;
 
-    constructor(app: App, zotero: Zotero, editor: Editor) {
+    constructor(app: App, connector: ZoteroConnector, editor: Editor) {
         super(app);
-        this.zotero = zotero;
+        this.connector = connector;
         this.editor = editor;
     }
 
     getSuggestions(query: string): Promise<ZoteroItem[]> {
-        return this.zotero.searchEverything(query);
+        return this.connector.searchEverything(query);
     }
 
     renderSuggestion(item: ZoteroItem, el: HTMLElement) {
@@ -24,6 +24,6 @@ export class ZoteroSearchModal extends SuggestModal<ZoteroItem> {
     }
 
     onChooseSuggestion(item: ZoteroItem) {
-        this.editor.replaceRange(`[${item.getTitle()}](zotero://select/library/items/${item.getKey()})`, this.editor.getCursor());
+        this.editor.replaceRange(item.getLink(), this.editor.getCursor());
     }
 }
