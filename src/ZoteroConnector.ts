@@ -6,11 +6,13 @@ import { ZoteroItem } from './ZoteroItem';
 export class ZoteroConnector {
 
     settings: ZoteroPluginSettings;
-    baseUrl: string;
 
     constructor(settings: ZoteroPluginSettings) {
         this.settings = settings;
-        this.baseUrl = `http://${settings.host}:${settings.port}/zotserver`;
+    }
+
+    get baseUrl(): string {
+        return `http://${this.settings.host}:${this.settings.port}/zotserver`;
     }
 
     public searchEverything(query: string) {

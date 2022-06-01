@@ -22,17 +22,11 @@ export class ZoteroPlugin extends Plugin {
             }
         });
 
-        this.init();
+        this.zoteroConnector = new ZoteroConnector(this.settings);
     }
 
     async saveSettings(newSettings: Partial<ZoteroPluginSettings>) {
-        this.settings = Object.assign({}, this.settings, newSettings);
+        Object.assign(this.settings, newSettings);
         await this.saveData(this.settings);
-        // apply new settings
-        this.init();
-    }
-
-    init() {
-        this.zoteroConnector = new ZoteroConnector(this.settings);
     }
 }

@@ -1,3 +1,4 @@
+import { sanitizeHTMLToDom } from 'obsidian';
 import { renderString } from 'nunjucks';
 import { ZoteroPluginSettings } from './ZoteroPluginSettings';
 
@@ -51,8 +52,8 @@ export class ZoteroItem {
     getNoteExcerpt() {
         if (this.raw.note) {
             const div = document.createElement('div');
-            div.innerHTML = this.raw.note;
-            return (div.textContent || div.innerText || '').substring(0, 50) + '...';
+            div.appendChild(sanitizeHTMLToDom(this.raw.note));
+            return (div.textContent || div.innerText || '').trim().substring(0, 50) + '...';
         }
 
         return '';
