@@ -13,27 +13,13 @@ export class ZoteroSettingTab extends PluginSettingTab {
         this.containerEl.empty();
 
         const description = document.createDocumentFragment();
-
         description.append(
             description.createEl('a', {
                 href: 'https://mozilla.github.io/nunjucks/templating.html#builtin-filters',
                 text: 'Nunjucks',
             }),
-            ' syntax is supported.',
+            ' syntax is supported. ',
         );
-
-        new Setting(this.containerEl)
-            .setName('Link title template')
-            .setDesc(description)
-            .addText((text) => text.setPlaceholder('default: {{ title }}')
-                .setValue(this.plugin.settings.linkTemplate)
-                .onChange(async (value) => {
-                    await this.plugin.saveSettings({
-                        linkTemplate: value
-                    });
-                }));
-
-
 
         const availableKeywords = document.createDocumentFragment();
         const keywordList = availableKeywords.createEl('ul');
@@ -48,10 +34,62 @@ export class ZoteroSettingTab extends PluginSettingTab {
         keywordList.appendChild(availableKeywords.createEl('li', { text: '{% for author in authors %}{{ author.lastName}}, {{ author.firstName | first }}., {% endfor %}'}));
 
         availableKeywords.append(
-            'Following keywords are available:',
+            'The following keywords are available:',
             keywordList
         );
 
-        new Setting(this.containerEl).setDesc(availableKeywords);
+        description.append(availableKeywords);
+
+        new Setting(this.containerEl).setDesc(description);
+
+
+        // links
+        this.containerEl.createEl('h4', { text: 'Link settings' });
+
+        new Setting(this.containerEl)
+            .setName('Link title template')
+            .addText((text) => text.setPlaceholder('default: {{ title }}')
+                .setValue(this.plugin.settings.linkTemplate)
+                .onChange(async (value) => {
+                    await this.plugin.saveSettings({
+                        linkTemplate: value
+                    });
+                }));
+
+        // note
+        this.containerEl.createEl('h4', { text: 'Note settings' });
+
+        new Setting(this.containerEl)
+            .setName('Note directory')
+            .addText((text) => text
+                    .setValue(this.plugin.settings.noteDirectory)
+                    .onChange(async (value) => {
+                    await this.plugin.saveSettings({
+                        noteDirectory: value
+                    });
+                }))
+            .setDesc(
+                'Save note file in this directory within the vault. If empty, notes will be stored in the root directory of the vault.',
+            );
+
+        new Setting(this.containerEl)
+            .setName('Note title template')
+            .addText((text) => text
+                    .setValue(this.plugin.settings.noteTitleTemplate)
+                    .onChange(async (value) => {
+                    await this.plugin.saveSettings({
+                        noteTitleTemplate: value
+                    });
+                }));
+
+        new Setting(this.containerEl)
+            .setName('Note content template')
+            .addTextArea((text) => text
+                    .setValue(this.plugin.settings.noteContentTemplate)
+                    .onChange(async (value) => {
+                    await this.plugin.saveSettings({
+                        noteContentTemplate: value
+                    });
+                }));
     }
 }

@@ -14,10 +14,14 @@ export class ZoteroItem {
 
     raw: ZoteroRawItem;
     linkTemplate: string;
+    noteTitleTemplate: string;
+    noteContentTemplate: string;
 
-    constructor(raw: ZoteroRawItem, { linkTemplate }: Partial<ZoteroPluginSettings>) {
+    constructor(raw: ZoteroRawItem, { linkTemplate, noteTitleTemplate, noteContentTemplate, noteDirectory }: Partial<ZoteroPluginSettings>) {
         this.raw = raw;
         this.linkTemplate = linkTemplate;
+        this.noteTitleTemplate = noteTitleTemplate;
+        this.noteContentTemplate = noteContentTemplate;
     }
 
     getKey() {
@@ -102,4 +106,13 @@ export class ZoteroItem {
     getLink() {
         return `[${renderString(this.linkTemplate, this.getValues())}](zotero://select/library/items/${this.getKey()})`;
     }
+
+    getNoteTitle() {
+        return renderString(this.noteTitleTemplate, this.getValues()).replace(/[*"\\/<>:|?]/g, '_');
+    }
+
+    getNoteContent() {
+        return renderString(this.noteContentTemplate, this.getValues());
+    }
+    
 }

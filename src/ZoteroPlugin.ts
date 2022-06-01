@@ -1,6 +1,7 @@
 import { Editor, Plugin } from 'obsidian';
 import { ZoteroConnector } from './ZoteroConnector';
-import { ZoteroSearchModal } from './ZoteroSearchModal';
+import { ZoteroSearchModalLink } from './ZoteroSearchModalLink';
+import { ZoteroSearchModalNote } from './ZoteroSearchModalNote';
 import { ZoteroSettingTab } from "./ZoteroSettingTab";
 import { DEFAULT_SETTINGS, ZoteroPluginSettings } from './ZoteroPluginSettings';
 
@@ -18,7 +19,15 @@ export class ZoteroPlugin extends Plugin {
             id: 'zotero-insert-link',
             name: 'Insert link',
             editorCallback: (editor: Editor) => {
-                new ZoteroSearchModal(this.app, this.zoteroConnector, editor).open();
+                new ZoteroSearchModalLink(this.app, this.zoteroConnector, editor, this.settings).open();
+            }
+        });
+
+        this.addCommand({
+            id: 'zotero-insert-note',
+            name: 'Insert note',
+            editorCallback: (editor: Editor) => {
+                new ZoteroSearchModalNote(this.app, this.zoteroConnector, editor, this.settings).open();
             }
         });
 
