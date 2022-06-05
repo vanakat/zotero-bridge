@@ -1,8 +1,9 @@
-import { Editor, Plugin } from 'obsidian';
-import { ZoteroConnector } from './ZoteroConnector';
-import { ZoteroSearchModal } from './ZoteroSearchModal';
-import { ZoteroSettingTab } from "./ZoteroSettingTab";
-import { DEFAULT_SETTINGS, ZoteroPluginSettings } from './ZoteroPluginSettings';
+import {Editor, Plugin} from 'obsidian';
+import {ZoteroItem} from "./ZoteroItem";
+import {ZoteroConnector} from './ZoteroConnector';
+import {ZoteroSettingTab} from "./ZoteroSettingTab";
+import {promisedZoteroSearchModal} from './ZoteroSearchModal';
+import {DEFAULT_SETTINGS, ZoteroPluginSettings} from './ZoteroPluginSettings';
 
 export class ZoteroPlugin extends Plugin {
 
@@ -17,8 +18,10 @@ export class ZoteroPlugin extends Plugin {
         this.addCommand({
             id: 'zotero-insert-link',
             name: 'Insert link',
-            editorCallback: (editor: Editor) => {
-                new ZoteroSearchModal(this.app, this.zoteroConnector, editor).open();
+            editorCallback: async (editor: Editor) => {
+                promisedZoteroSearchModal(this.app, this.zoteroConnector).then((item: ZoteroItem) => {
+                    editor.replaceRange(item.getLink(), editor.getCursor());
+                })
             }
         });
 
