@@ -4,6 +4,7 @@ import {DEFAULT_SETTINGS, ZoteroBridgeSettings} from './ZoteroBridgeSettings';
 import {ZoteroConnector} from './ZoteroConnector';
 import {ZoteroBridgeApi} from "./ZoteroBridgeApi";
 
+/** @public */
 export class ZoteroBridge extends Plugin {
 
     settings: ZoteroBridgeSettings;

@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "node esbuild.config.mjs",
         "build": "tsc -noEmit -skipLibCheck && npm run declaration && node esbuild.config.mjs production",
-        "declaration": "tsc -emitDeclarationOnly --declaration true --out main.js --isolatedModules false",
+        "declaration": "tsc -emitDeclarationOnly --declaration true --outDir types && api-extractor run",
         "version": "node version-bump.mjs && git add manifest.json versions.json"
     },
     "keywords": [
@@ -18,6 +18,7 @@
     "author": "Shmavon Gazanchyan",
     "license": "MIT",
     "devDependencies": {
+        "@microsoft/api-extractor": "^7.24.2",
         "@types/node": "^16.11.6",
         "@typescript-eslint/eslint-plugin": "^5.2.0",
         "@typescript-eslint/parser": "^5.2.0",

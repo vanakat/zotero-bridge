@@ -9,6 +9,7 @@ export interface ZoteroRawItem {
     note?: string;
 }
 
+/** @public */
 export class ZoteroItem {
 
     raw: ZoteroRawItem;

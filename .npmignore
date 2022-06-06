@@ -8,6 +8,7 @@ version-bump.mjs
 versions.json
 
 src
+types
 
 # obsidian
 data.json
