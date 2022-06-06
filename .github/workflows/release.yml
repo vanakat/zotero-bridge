@@ -1,4 +1,4 @@
-name: Release Build
+name: Release
 
 on:
   push:
@@ -10,25 +10,38 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+    ##################
+    # Checkout code
+    ###################
     - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
+
+    ##################
+    # Setup .npmrc file to publish to npm
+    # install dependencies, build and push to npm
+    ###################
+    - uses: actions/setup-node@v1
       with:
         node-version: '14.x'
     - name: Build
       id: build
       run: |
         npm install
-        npm run build --if-present
+        npm run build
+        npm publish --access public
         mkdir ${{ env.PLUGIN_NAME }}
         cp main.js manifest.json ${{ env.PLUGIN_NAME }}
         zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
         ls
         echo "::set-output name=tag_name::$(git tag --sort version:refname | tail -n 1)"
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    ##################
+    # Create GitHub Release
+    ###################
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -40,6 +53,10 @@ jobs:
         release_name: ${{ github.ref }}
         draft: false
         prerelease: false
+
+    ##################
+    # Upload artifacts to GitHub Release
+    ###################
     - name: Upload zip file
       id: upload-zip
       uses: actions/upload-release-asset@v1

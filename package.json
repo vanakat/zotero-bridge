@@ -1,5 +1,5 @@
 {
-    "name": "zotero-bridge",
+    "name": "@vanakat/zotero-bridge",
     "version": "1.1.1",
     "description": "Zotero integration plugin",
     "main": "main.js",

@@ -1,0 +1,13 @@
+.github
+.eslintignore
+.eslintrc
+.gitignore
+esbuild.config.mjs
+tsconfig.json
+version-bump.mjs
+versions.json
+
+src
+
+# obsidian
+data.json
