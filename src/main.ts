@@ -1,3 +1,3 @@
-import { ZoteroPlugin } from './ZoteroPlugin';
+import { ZoteroBridge } from './ZoteroBridge';
 
-export default ZoteroPlugin;
+export default ZoteroBridge;

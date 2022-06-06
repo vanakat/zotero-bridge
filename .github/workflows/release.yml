@@ -6,7 +6,7 @@ on:
     - '*'
 
 env:
-  PLUGIN_NAME: obsidian-zotero
+  PLUGIN_NAME: zotero-bridge
 
 jobs:
   build:

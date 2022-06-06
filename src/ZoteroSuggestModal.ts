@@ -2,7 +2,7 @@ import { App, SuggestModal } from 'obsidian';
 import { ZoteroConnector } from './ZoteroConnector';
 import { ZoteroItem } from './ZoteroItem';
 
-export class ZoteroSearchModal extends SuggestModal<ZoteroItem> {
+export class ZoteroSuggestModal extends SuggestModal<ZoteroItem> {
 
     connector: ZoteroConnector;
     onSelect: any;
@@ -27,10 +27,10 @@ export class ZoteroSearchModal extends SuggestModal<ZoteroItem> {
     }
 }
 
-export function promisedZoteroSearchModal(...args: [App, ZoteroConnector]): Promise<ZoteroItem> {
+export function promisedZoteroSuggestModal(...args: [App, ZoteroConnector]): Promise<ZoteroItem> {
     return new Promise((resolve, reject) => {
         try {
-            new ZoteroSearchModal(...args, (item: ZoteroItem) => resolve(item)).open();
+            new ZoteroSuggestModal(...args, (item: ZoteroItem) => resolve(item)).open();
         } catch (e) {
             reject(e);
         }

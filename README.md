@@ -1,14 +1,12 @@
-# Obsidian Zotero Plugin
+# Obsidian ZoteroBridge Plugin
 
-Obsidian-Zotero connector plugin that allows to search and insert links to Zotero items from Obsidian interface.
+Obsidian-Zotero connector plugin that provides APIs for other plugins to integrate with Zotero.
 
 **Requires [ZotServer](https://github.com/MunGell/ZotServer) addon installed in your Zotero**
 
 ## How to use
 
 This plugin requires Zotero app being open with [ZotServer](https://github.com/MunGell/ZotServer) addon installed.
-
-After installation new command is available in command palette (`Cmd+P`) – `Zotero: Insert Link`
 
 ## How to contribute
 

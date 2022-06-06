@@ -1,6 +1,4 @@
 import { sanitizeHTMLToDom } from 'obsidian';
-import { renderString } from 'nunjucks';
-import { ZoteroPluginSettings } from './ZoteroPluginSettings';
 
 export interface ZoteroRawItem {
     key: string;
@@ -14,11 +12,9 @@ export interface ZoteroRawItem {
 export class ZoteroItem {
 
     raw: ZoteroRawItem;
-    linkTemplate: string;
 
-    constructor(raw: ZoteroRawItem, { linkTemplate }: Partial<ZoteroPluginSettings>) {
+    constructor(raw: ZoteroRawItem) {
         this.raw = raw;
-        this.linkTemplate = linkTemplate;
     }
 
     getKey() {
@@ -98,9 +94,5 @@ export class ZoteroItem {
             authors: this.getAuthors(),
             firstAuthor: this.getAuthor(),
         };
-    }
-
-    getLink() {
-        return `[${renderString(this.linkTemplate, this.getValues())}](zotero://select/library/items/${this.getKey()})`;
     }
 }
