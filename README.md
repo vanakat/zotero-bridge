@@ -1,4 +1,4 @@
-# Obsidian ZoteroBridge Plugin
+# Obsidian Zotero Bridge Plugin
 
 Obsidian-Zotero connector plugin that provides APIs for other plugins to integrate with Zotero.
 
@@ -6,7 +6,37 @@ Obsidian-Zotero connector plugin that provides APIs for other plugins to integra
 
 ## How to use
 
-This plugin requires Zotero app being open with [ZotServer](https://github.com/MunGell/ZotServer) addon installed.
+Zotero Bridge provides APIs for other plugins to connect to Zotero with installed [ZotServer](https://github.com/MunGell/ZotServer) addon.
+
+Example of such consumer plugin is [Zotero Link](https://github.com/vanakat/zotero-link).
+
+APIs of this plugin are published with Obsidian [plugin api](https://github.com/vanakat/plugin-api) library and can be used anywhere in Obsidian.
+
+Example use of Zotero Bridge APIs in [Templater](https://github.com/SilentVoid13/Templater) [user scripts](https://silentvoid13.github.io/Templater/user-functions/script-user-functions.html):
+
+`zotero.js` user script:
+
+```js
+module.exports = async function () {
+    const item = await PluginApi.ZoteroBridge.v1().search();
+    return (prop) => dotAccess(prop, item.getValues());
+}
+
+function dotAccess(str, obj) {
+    return str.split('.').reduce((previousValue, currentValue) => previousValue[currentValue], obj);
+}
+```
+
+This function can now be used in templates:
+
+_(this example is taken from https://github.com/vanakat/zotero-bridge/pull/2)_
+
+```
+<%* const zi = await tp.user.zotero() %>
+
+
+<% zi('firstAuthor.lastName') %><%* if (zi('authors.length')  == 2) { %> and <% zi('authors')[1].lastName %><%* } else if (zi('authors.length') > 2) { %> et al.<%* } %> <% zi('date.year') %> <% zi('title') %>
+```
 
 ## How to contribute
 
