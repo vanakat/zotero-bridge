@@ -10,7 +10,7 @@ export class ZoteroBridgeApiV1 {
     }
 
     search() {
-        return promisedZoteroSuggestModal(this.plugin.app, this.plugin.zoteroConnector);
+        return promisedZoteroSuggestModal(this.plugin.app, this.plugin.zoteroAdapter);
     }
 
 }

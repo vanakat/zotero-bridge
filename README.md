@@ -1,6 +1,6 @@
 # Obsidian Zotero Bridge Plugin
 
-Obsidian-Zotero connector plugin that provides APIs for other plugins to integrate with Zotero.
+Obsidian-Zotero integration plugin that provides APIs for other plugins to integrate with Zotero.
 
 **Requires [ZotServer](https://github.com/MunGell/ZotServer) addon installed in your Zotero**
 

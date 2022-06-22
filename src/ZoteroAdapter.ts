@@ -2,7 +2,7 @@ import { request, Notice } from 'obsidian';
 import { ZoteroBridgeSettings } from './ZoteroBridgeSettings';
 import { ZoteroItem } from './ZoteroItem';
 
-export class ZoteroConnector {
+export class ZoteroAdapter {
 
     settings: ZoteroBridgeSettings;
 
