@@ -29,7 +29,7 @@ export class ZoteroAdapter {
             body: JSON.stringify(conditions)
         })
             .then(JSON.parse)
-            .then((items: []) => items.map(item => new ZoteroItem(item)))
+            .then((items: []) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item)))
             .catch(() => {
                 new Notice(`Couldn't connect to Zotero, please check the app is open and ZotServer is installed`);
                 return [];
