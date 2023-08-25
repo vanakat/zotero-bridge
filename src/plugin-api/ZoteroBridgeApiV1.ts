@@ -13,4 +13,11 @@ export class ZoteroBridgeApiV1 {
         return promisedZoteroSuggestModal(this.plugin.app, this.plugin.zoteroAdapter);
     }
 
+    searchTitleCreatorYear() {
+        return promisedZoteroSuggestModalTitleCreatorYear(this.plugin.app, this.plugin.zoteroAdapter);
+    }
+
+    searchTag() {
+        return promisedZoteroSuggestModalTag(this.plugin.app, this.plugin.zoteroAdapter);
+    }
 }
