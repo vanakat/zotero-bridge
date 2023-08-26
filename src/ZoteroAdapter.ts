@@ -21,6 +21,22 @@ export class ZoteroAdapter {
         }])
     }
 
+    public searchTitleCreatorYear(query: string) {
+        return this.search([{
+            condition: 'quicksearch-titleCreatorYear',
+            value: query
+        }])
+    }
+
+    public searchTag(query: string) {
+        return this.search([{
+            condition: 'tag',
+            operator: "is",
+            value: query,
+            required: true
+        }])
+    }
+
     public search(conditions: any[]) {
         return request({
             url: `${this.baseUrl}/search`,
