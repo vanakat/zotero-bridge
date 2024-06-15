@@ -4,7 +4,7 @@ import builtins from 'builtin-modules'
 
 const prod = (process.argv[2] === 'production');
 
-esbuild.build({
+let ctx = await esbuild.context({
 	entryPoints: ['src/main.ts'],
 	bundle: true,
 	external: [
@@ -33,10 +33,13 @@ esbuild.build({
 		'@codemirror/view',
 		...builtins],
 	format: 'cjs',
-	watch: !prod,
 	target: 'es2016',
 	logLevel: "info",
 	sourcemap: prod ? false : 'inline',
 	treeShaking: true,
 	outfile: 'main.js',
 }).catch(() => process.exit(1));
+
+if (!prod) {
+    await ctx.watch()
+}
