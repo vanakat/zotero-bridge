@@ -77,7 +77,7 @@ export class ZotServerAdapter implements ZoteroAdapter {
 
     search(query: string) {
         return this.items({
-            condition: 'quicksearch-everything',
+            condition: 'quicksearch-titleCreatorYear',
             q: query
         })
     }
