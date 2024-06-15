@@ -1,8 +1,9 @@
 import {Plugin} from 'obsidian';
 import {registerAPI} from '@vanakat/plugin-api';
 import {DEFAULT_SETTINGS, ZoteroBridgeSettings} from './ZoteroBridgeSettings';
-import { ZoteroAdapter } from './ZoteroAdapter';
+import { ZoteroAdapter, ZoteroAdapters } from './ZoteroAdapter';
 import {ZoteroBridgeApi} from "./ZoteroBridgeApi";
+import { ZoteroBridgeSettingTab } from './ZoteroBridgeSettingTab';
 
 /** @public */
 export class ZoteroBridge extends Plugin {
@@ -12,7 +13,9 @@ export class ZoteroBridge extends Plugin {
 
     async onload() {
         this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-        this.zoteroAdapter = new ZoteroAdapter(this.settings);
+        this.zoteroAdapter = new ZoteroAdapters[this.settings.connectionType](this.settings);
+
+        this.addSettingTab(new ZoteroBridgeSettingTab(this.app, this));
 
         registerAPI('ZoteroBridge', new ZoteroBridgeApi(this), this);
     }

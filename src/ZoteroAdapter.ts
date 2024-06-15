@@ -1,9 +1,70 @@
 import { request, Notice } from 'obsidian';
 import { ZoteroBridgeSettings } from './ZoteroBridgeSettings';
 import { ZoteroItem } from './ZoteroItem';
+import { ZoteroBridgeConnectionType } from './ZoteroBridgeSettings'
 
-export class ZoteroAdapter {
+type ZoteroItemsRequestParameters = {
+    condition?: string, // ZotServer-specific parameter, to be deprecated in future
+    itemType?: string,
+    tag?: string,
+    format?: string,
+    include?: string,
+    since?: string,
+    sort?: string,
+    q?: string
+}
 
+/**
+ * Connection to Zotero API
+ * Either ZotServer or LocalAPI
+ */
+export interface ZoteroAdapter {
+    settings: ZoteroBridgeSettings;
+    get baseUrl(): string;
+    search(query: string): Promise<ZoteroItem[]>;
+    items(parameters: ZoteroItemsRequestParameters): Promise<ZoteroItem[]>;
+}
+
+/**
+ * LocalAPI v3 connection adapter
+ * Available in Zotero since v7 (beta-88)
+ */
+export class LocalAPIV3Adapter implements ZoteroAdapter {
+    settings: ZoteroBridgeSettings;
+
+    constructor(settings: ZoteroBridgeSettings) {
+        this.settings = settings;
+    }
+
+    get baseUrl(): string {
+        return `http://${this.settings.host}:${this.settings.port}/api/${this.settings.userOrGroup}`;
+    }
+
+    search(query: string) {
+        return this.items({
+            itemType: '-attachment',
+            q: query
+        })
+    }
+
+    items(parameters: ZoteroItemsRequestParameters): Promise<ZoteroItem[]> {
+        return request({
+            url: `${this.baseUrl}/items?` + new URLSearchParams(parameters).toString(),
+            method: 'get',
+            contentType: 'application/json'
+        })
+            .then(JSON.parse)
+            .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item.data)))
+            .catch(() => {
+                new Notice(`Couldn't connect to Zotero, please check the app is open and Zotero Local API is enabled`);
+                return [];
+            });
+    }
+}
+/**
+ * ZotServer connection adapter
+ */
+export class ZotServerAdapter implements ZoteroAdapter {
     settings: ZoteroBridgeSettings;
 
     constructor(settings: ZoteroBridgeSettings) {
@@ -14,19 +75,19 @@ export class ZoteroAdapter {
         return `http://${this.settings.host}:${this.settings.port}/zotserver`;
     }
 
-    public searchEverything(query: string) {
-        return this.search([{
+    search(query: string) {
+        return this.items({
             condition: 'quicksearch-everything',
-            value: query
-        }])
+            q: query
+        })
     }
 
-    public search(conditions: any[]) {
+    items(parameters: ZoteroItemsRequestParameters): Promise<ZoteroItem[]> {
         return request({
             url: `${this.baseUrl}/search`,
             method: 'post',
             contentType: 'application/json',
-            body: JSON.stringify(conditions)
+            body: JSON.stringify(parameters)
         })
             .then(JSON.parse)
             .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item)))
@@ -35,4 +96,9 @@ export class ZoteroAdapter {
                 return [];
             });
     }
+}
+
+export const ZoteroAdapters = {
+    [ZoteroBridgeConnectionType.ZotServer]: ZotServerAdapter,
+    [ZoteroBridgeConnectionType.LocalAPIV3]: LocalAPIV3Adapter,
 }

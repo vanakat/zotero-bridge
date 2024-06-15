@@ -1,6 +1,9 @@
 import {ZoteroBridge} from './ZoteroBridge';
 import {ZoteroBridgeApiV1} from './plugin-api/ZoteroBridgeApiV1';
 
+/**
+ * Expose ZoteroBridge API to other Obsidian plugins
+ */
 export class ZoteroBridgeApi {
 
     plugin: ZoteroBridge;

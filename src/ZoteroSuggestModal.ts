@@ -14,7 +14,7 @@ export class ZoteroSuggestModal extends SuggestModal<ZoteroItem> {
     }
 
     getSuggestions(query: string): Promise<ZoteroItem[]> {
-        return this.adapter.searchEverything(query);
+        return this.adapter.search(query);
     }
 
     renderSuggestion(item: ZoteroItem, el: HTMLElement) {
