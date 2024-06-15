@@ -4,7 +4,6 @@ import { ZoteroItem } from './ZoteroItem';
 import { ZoteroBridgeConnectionType } from './ZoteroBridgeSettings'
 
 type ZoteroItemsRequestParameters = {
-    condition?: string, // ZotServer-specific parameter, to be deprecated in future
     itemType?: string,
     tag?: string,
     format?: string,
@@ -77,7 +76,6 @@ export class ZotServerAdapter implements ZoteroAdapter {
 
     search(query: string) {
         return this.items({
-            condition: 'quicksearch-titleCreatorYear',
             q: query
         })
     }
@@ -87,7 +85,10 @@ export class ZotServerAdapter implements ZoteroAdapter {
             url: `${this.baseUrl}/search`,
             method: 'post',
             contentType: 'application/json',
-            body: JSON.stringify(parameters)
+            body: JSON.stringify({
+                condition: 'quicksearch-titleCreatorYear',
+                value: parameters.q
+            })
         })
             .then(JSON.parse)
             .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item)))
