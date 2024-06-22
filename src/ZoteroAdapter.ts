@@ -46,6 +46,16 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
         })
     }
 
+    groups(): Promise<any[]> {
+        return request({
+            url: `http://${this.settings.host}:${this.settings.port}/api/users/0/groups`,
+            method: 'get',
+            contentType: 'application/json'
+        })
+            .then(JSON.parse)
+            .then((groups: any[]) => groups.map(group => group.data));
+    }
+
     items(parameters: ZoteroItemsRequestParameters): Promise<ZoteroItem[]> {
         return request({
             url: `${this.baseUrl}/items?` + new URLSearchParams(parameters).toString(),
