@@ -1,8 +1,16 @@
 # Obsidian Zotero Bridge Plugin
 
-Obsidian-Zotero integration plugin that provides APIs for other plugins to integrate with Zotero.
+Obsidian-Zotero integration plugin that provides APIs for other plugins to connect to Zotero.
 
-**Requires [ZotServer](https://github.com/MunGell/ZotServer) addon installed in your Zotero**
+## Prerequisites
+
+### Zotero >= 7
+
+Enable Local API feature in settings: `Zotero 7 > Settings > Advanced > Allow other applications on this computer to communicate with Zotero`
+
+### Zotero <= 6
+
+Install Zotero addon [ZotServer](https://github.com/MunGell/ZotServer)
 
 ## How to use
 
@@ -52,6 +60,7 @@ Please refer to following helpful resources:
 * [Official Obsidian API definition file](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts)
 * [ZotServer repository](https://github.com/MunGell/ZotServer) for documentation on API
 * [Zotero search API code](https://github.com/zotero/zotero/blob/master/chrome/content/zotero/xpcom/data/search.js) for the most up-to-date search API documentation
+* [Zotero 7 Local API announcement](https://groups.google.com/g/zotero-dev/c/ElvHhIFAXrY/m/fA7SKKwsAgAJ)
 
 ## Other Zotero integration plugins
 
