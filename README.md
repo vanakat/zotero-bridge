@@ -14,7 +14,7 @@ Install Zotero addon [ZotServer](https://github.com/MunGell/ZotServer)
 
 ## How to use
 
-Zotero Bridge provides APIs for other plugins to connect to Zotero with installed [ZotServer](https://github.com/MunGell/ZotServer) addon.
+Zotero Bridge provides APIs for other plugins to connect to Zotero.
 
 Example of such consumer plugin is [Zotero Link](https://github.com/vanakat/zotero-link).
 
