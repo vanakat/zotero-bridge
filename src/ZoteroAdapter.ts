@@ -63,7 +63,7 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
             contentType: 'application/json'
         })
             .then(JSON.parse)
-            .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item.data)))
+            .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.data.itemType)).map(item => new ZoteroItem(item.data)))
             .catch(() => {
                 new Notice(`Couldn't connect to Zotero, please check the app is open and Zotero Local API is enabled`);
                 return [];
