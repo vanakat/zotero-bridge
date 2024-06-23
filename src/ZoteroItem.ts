@@ -26,8 +26,6 @@ export class ZoteroItem {
         return this.raw.shortTitle || this.raw.title || this.getNoteExcerpt() || '[No Title]';
     }
 
-    // @todo: some transformations in this class should be moved to ZotServer
-    // breaking changes for ZotServer v2
     getAuthors() {
         return this.getCreators()
             .filter(creator => creator.creatorType === 'author')
@@ -43,7 +41,7 @@ export class ZoteroItem {
     }
 
     getDate() {
-        return this.raw.date ? this.formatDate(this.raw.date) : '';
+        return this.raw.date ? this.formatDate(this.raw.date) : null;
     }
 
     getNoteExcerpt() {
@@ -79,6 +77,10 @@ export class ZoteroItem {
 
     formatDate(date: string) {
         const dateObject = new Date(date);
+
+        if (isNaN(dateObject.getTime())) {
+            return null;
+        }
 
         return {
             year: dateObject.getFullYear(),
