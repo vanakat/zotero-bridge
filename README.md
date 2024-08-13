@@ -6,7 +6,7 @@ Obsidian-Zotero integration plugin that provides APIs for other plugins to conne
 
 ### Zotero >= 7
 
-Enable Local API feature in settings: `Zotero 7 > Settings > Advanced > Allow other applications on this computer to communicate with Zotero`
+Enable Local API feature in settings: `Edit > Settings > Advanced > Allow other applications on this computer to communicate with Zotero`
 
 ### Zotero <= 6
 
