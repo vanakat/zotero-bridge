@@ -95,10 +95,10 @@ export class ZotServerAdapter implements ZoteroAdapter {
             url: `${this.baseUrl}/search`,
             method: 'post',
             contentType: 'application/json',
-            body: JSON.stringify({
+            body: JSON.stringify([{
                 condition: 'quicksearch-titleCreatorYear',
                 value: parameters.q
-            })
+            }])
         })
             .then(JSON.parse)
             .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem(item)))
