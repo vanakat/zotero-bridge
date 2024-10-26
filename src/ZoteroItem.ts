@@ -23,7 +23,11 @@ export class ZoteroItem {
     }
 
     getTitle() {
-        return this.raw.shortTitle || this.raw.title || this.getNoteExcerpt() || '[No Title]';
+        return this.raw.title || this.raw.shortTitle || this.getNoteExcerpt() || '[No Title]';
+    }
+
+    getShortTitle() {
+        return this raw.shortTitle;
     }
 
     getAuthors() {
