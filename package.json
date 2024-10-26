@@ -22,7 +22,7 @@
         "@types/node": "^20.14.2",
         "@typescript-eslint/eslint-plugin": "^7.13.0",
         "@typescript-eslint/parser": "^7.13.0",
-        "@vanakat/plugin-api": "^0.1.0",
+        "@vanakat/plugin-api": "^0.2.0",
         "builtin-modules": "^4.0.0",
         "esbuild": "0.21.5",
         "obsidian": "latest",
