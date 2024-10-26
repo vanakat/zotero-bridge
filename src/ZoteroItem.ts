@@ -27,7 +27,7 @@ export class ZoteroItem {
     }
 
     getShortTitle() {
-        return this raw.shortTitle;
+        return this.raw.shortTitle;
     }
 
     getAuthors() {
@@ -97,6 +97,7 @@ export class ZoteroItem {
         return {
             key: this.getKey(),
             title: this.getTitle(),
+            shortTitle: this.getShortTitle(),
             date: this.getDate(),
             authors: this.getAuthors(),
             firstAuthor: this.getAuthor(),
