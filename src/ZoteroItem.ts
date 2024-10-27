@@ -45,7 +45,7 @@ export class ZoteroItem {
     }
 
     getDate() {
-        return this.raw.date ? this.formatDate(this.raw.date) : null;
+        return this.raw.date ? this.formatDate(this.raw.date) : { year: null, month: null, day: null };
     }
 
     getNoteExcerpt() {
@@ -88,7 +88,7 @@ export class ZoteroItem {
 
         return {
             year: dateObject.getFullYear(),
-            month: dateObject.getMonth(),
+            month: dateObject.getMonth() + 1,
             day: dateObject.getDate()
         }
     }
