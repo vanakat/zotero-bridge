@@ -18,24 +18,20 @@ export class ZoteroSuggestModal extends SuggestModal<ZoteroItem> {
     }
 
     renderSuggestion(item: ZoteroItem, el: HTMLElement) {
-        const authors = item.getAuthors();
+        const creator = item.getCreatorSummary();
         el.createEl('div', { text: item.getTitle() });
 
         // author
-        if (authors.length > 0) {
-            let text = authors[0].fullName + ' ';
-            if (authors.length > 1) {
-                text += 'et al. '
-            }
-            el.createEl('small', { text });
-
-            // date
-            if (item.getDate()) {
-                el.createEl('small', { text: `(${item.getDate().year}) ` });
-            }
+        if (creator) {
+            el.createEl('small', { text: creator });
         }
 
-        el.createEl('small', { text: `[${item.getKey()}]`, cls: 'zotero-bridge__text-secondary' });
+        // date
+        if (item.getDate()) {
+            el.createEl('small', { text: ` (${item.getDate().year})` });
+        }
+
+        el.createEl('small', { text: ` [${item.getKey()}]`, cls: 'zotero-bridge__text-secondary' });
     }
 
     onChooseSuggestion(item: ZoteroItem) {

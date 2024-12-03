@@ -1,12 +1,18 @@
 import { sanitizeHTMLToDom } from 'obsidian';
 
 export interface ZoteroRawItem {
-    key: string;
-    title?: string;
-    shortTitle?: string;
-    creators?: any[];
-    date?: string;
-    note?: string;
+    meta: {
+        creatorSummary?: string;
+        parsedDate?: string;
+    };
+    data: {
+        key: string;
+        title?: string;
+        shortTitle?: string;
+        creators?: any[];
+        date?: string;
+        note?: string;
+    }
 }
 
 /** @public */
@@ -19,15 +25,19 @@ export class ZoteroItem {
     }
 
     getKey() {
-        return this.raw.key;
+        return this.raw.data.key;
     }
 
     getTitle() {
-        return this.raw.title || this.raw.shortTitle || this.getNoteExcerpt() || '[No Title]';
+        return this.raw.data.title || this.raw.data.shortTitle || this.getNoteExcerpt() || '[No Title]';
     }
 
     getShortTitle() {
-        return this.raw.shortTitle;
+        return this.raw.data.shortTitle;
+    }
+
+    getCreatorSummary() {
+        return this.raw.meta.creatorSummary;
     }
 
     getAuthors() {
@@ -41,17 +51,18 @@ export class ZoteroItem {
     }
 
     getCreators() {
-        return this.raw.creators || [];
+        return this.raw.data.creators || [];
     }
 
     getDate() {
-        return this.raw.date ? this.formatDate(this.raw.date) : { year: null, month: null, day: null };
+        const date = this.raw.meta.parsedDate || this.raw.data.date;
+        return date ? this.formatDate(date) : { year: null, month: null, day: null };
     }
 
     getNoteExcerpt() {
-        if (this.raw.note) {
+        if (this.raw.data.note) {
             const div = document.createElement('div');
-            div.appendChild(sanitizeHTMLToDom(this.raw.note));
+            div.appendChild(sanitizeHTMLToDom(this.raw.data.note));
             return (div.textContent || div.innerText || '').trim().substring(0, 50) + '...';
         }
 
@@ -87,9 +98,9 @@ export class ZoteroItem {
         }
 
         return {
-            year: dateObject.getFullYear(),
-            month: dateObject.getMonth() + 1,
-            day: dateObject.getDate()
+            year: dateObject.getUTCFullYear(),
+            month: dateObject.getUTCMonth() + 1,
+            day: dateObject.getUTCDate()
         }
     }
 
@@ -101,6 +112,7 @@ export class ZoteroItem {
             date: this.getDate(),
             authors: this.getAuthors(),
             firstAuthor: this.getAuthor(),
+            creatorSummary: this.getCreatorSummary(),
         };
     }
 }
