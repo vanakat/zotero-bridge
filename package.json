@@ -1,6 +1,6 @@
 {
     "name": "@vanakat/zotero-bridge",
-    "version": "1.6.5",
+    "version": "1.6.6",
     "description": "Zotero integration plugin",
     "main": "main.js",
     "types": "main.d.ts",
