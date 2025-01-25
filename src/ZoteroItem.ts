@@ -1,7 +1,7 @@
 import { sanitizeHTMLToDom } from 'obsidian';
 
 export interface ZoteroRawItem {
-    meta: {
+    meta?: {
         creatorSummary?: string;
         parsedDate?: string;
     };
@@ -37,7 +37,14 @@ export class ZoteroItem {
     }
 
     getCreatorSummary() {
-        return this.raw.meta.creatorSummary;
+        if (
+            this.raw.hasOwnProperty("meta") &&
+            this.raw.meta.hasOwnProperty("creatorSummary")
+        ) {
+            return this.raw.meta.creatorSummary;
+        } else {
+            return this.getAuthor()? this.getAuthor().fullName : '';
+        }
     }
 
     getAuthors() {
@@ -55,8 +62,18 @@ export class ZoteroItem {
     }
 
     getDate() {
-        const date = this.raw.meta.parsedDate || this.raw.data.date;
-        return date ? this.formatDate(date) : { year: null, month: null, day: null };
+        let date = this.raw.data.date;
+
+        if (
+            this.raw.hasOwnProperty("meta") &&
+            this.raw.meta.hasOwnProperty("parsedDate")
+        ) {
+            date = this.raw.meta.parsedDate;
+        }
+
+        return date
+            ? this.formatDate(date)
+            : { year: null, month: null, day: null };
     }
 
     getNoteExcerpt() {
@@ -100,8 +117,8 @@ export class ZoteroItem {
         return {
             year: dateObject.getUTCFullYear(),
             month: dateObject.getUTCMonth() + 1,
-            day: dateObject.getUTCDate()
-        }
+            day: dateObject.getUTCDate(),
+        };
     }
 
     getValues() {
