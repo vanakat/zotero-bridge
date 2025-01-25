@@ -23,15 +23,16 @@ export class ZoteroSuggestModal extends SuggestModal<ZoteroItem> {
 
         // author
         if (creator) {
-            el.createEl('small', { text: creator });
+            el.createEl('small', { text: `${creator} ` });
         }
 
         // date
-        if (item.getDate()) {
-            el.createEl('small', { text: ` (${item.getDate().year})` });
+        const year = item.getDate().year;
+        if (year) {
+            el.createEl('small', { text: `(${year}) ` });
         }
 
-        el.createEl('small', { text: ` [${item.getKey()}]`, cls: 'zotero-bridge__text-secondary' });
+        el.createEl('small', { text: `[${item.getKey()}]`, cls: 'zotero-bridge__text-secondary' });
     }
 
     onChooseSuggestion(item: ZoteroItem) {
