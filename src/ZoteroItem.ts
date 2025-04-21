@@ -1,5 +1,3 @@
-import { sanitizeHTMLToDom } from 'obsidian';
-
 export interface ZoteroRawItem {
     meta?: {
         creatorSummary?: string;
@@ -12,12 +10,11 @@ export interface ZoteroRawItem {
         creators?: any[];
         date?: string;
         note?: string;
-    }
+    };
 }
 
 /** @public */
 export class ZoteroItem {
-
     raw: ZoteroRawItem;
 
     constructor(raw: ZoteroRawItem) {
@@ -29,7 +26,7 @@ export class ZoteroItem {
     }
 
     getTitle() {
-        return this.raw.data.title || this.raw.data.shortTitle || this.getNoteExcerpt() || '[No Title]';
+        return this.raw.data.title || this.raw.data.shortTitle || '[No Title]';
     }
 
     getShortTitle() {
@@ -43,7 +40,7 @@ export class ZoteroItem {
         ) {
             return this.raw.meta.creatorSummary;
         } else {
-            return this.getAuthor()? this.getAuthor().fullName : '';
+            return this.getAuthor() ? this.getAuthor().fullName : '';
         }
     }
 
@@ -76,33 +73,21 @@ export class ZoteroItem {
             : { year: null, month: null, day: null };
     }
 
-    getNoteExcerpt() {
-        if (this.raw.data.note) {
-            const div = document.createElement('div');
-            div.appendChild(sanitizeHTMLToDom(this.raw.data.note));
-            return (div.textContent || div.innerText || '').trim().substring(0, 50) + '...';
-        }
-
-        return '';
-    }
-
     normalizeName(creator: any) {
         const names = {
             firstName: creator.firstName,
             lastName: creator.lastName,
-            fullName: ''
-        }
+            fullName: '',
+        };
 
         if (creator.hasOwnProperty('name')) {
             const delimiter = creator.name.lastIndexOf(' ');
             names.firstName = creator.name.substring(0, delimiter + 1).trim();
             names.lastName = creator.name.substring(delimiter).trim();
             names.fullName = creator.name;
-
         } else {
             names.fullName = `${names.firstName} ${names.lastName}`;
         }
-
 
         return names;
     }
