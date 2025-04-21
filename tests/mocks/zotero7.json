@@ -1,0 +1,526 @@
+[
+    {
+        "key": "8NNLV8L2",
+        "version": 4127,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/8NNLV8L2",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/8NNLV8L2",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/CRKZWGF4",
+                "type": "application/json",
+                "attachmentType": "application/pdf",
+                "attachmentSize": 107050
+            }
+        },
+        "meta": {
+            "creatorSummary": "Westrum",
+            "parsedDate": "2001-12-01",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "8NNLV8L2",
+            "version": 4127,
+            "itemType": "journalArticle",
+            "title": "A typology of organisational cultures",
+            "date": "1 December 2001",
+            "language": "en",
+            "libraryCatalog": "DOI.org (Crossref)",
+            "url": "https://qualitysafety.bmj.com/lookup/doi/10.1136/qshc.2003.009522",
+            "accessDate": "2020-12-15T23:25:02Z",
+            "volume": "13",
+            "pages": "ii22-ii27",
+            "publicationTitle": "Quality and Safety in Health Care",
+            "DOI": "10.1136/qshc.2003.009522",
+            "issue": "suppl_2",
+            "journalAbbreviation": "Quality and Safety in Health Care",
+            "ISSN": "1475-3898, 1475-3901",
+            "creators": [
+                {
+                    "firstName": "R",
+                    "lastName": "Westrum",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "corporate culture"
+                },
+                {
+                    "tag": "management"
+                }
+            ],
+            "collections": [],
+            "relations": {},
+            "dateAdded": "2020-12-15T23:25:02Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "HBL46N9Q",
+        "version": 4127,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/HBL46N9Q",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/HBL46N9Q",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/FVBFNQIH",
+                "type": "application/json",
+                "attachmentType": "text/html",
+                "attachmentSize": 626875
+            }
+        },
+        "meta": {
+            "creatorSummary": "Kent Beck",
+            "parsedDate": "2016-07-19",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "HBL46N9Q",
+            "version": 4127,
+            "itemType": "blogPost",
+            "title": "The Product Development Triathlon",
+            "abstractNote": "Republished from the original published on July 19, 2016.",
+            "date": "2016-07-19T17:30:37.306Z",
+            "language": "en",
+            "url": "https://medium.com/@kentbeck_7670/the-product-development-triathlon-6464e2763c46",
+            "accessDate": "2020-12-18T11:17:00Z",
+            "blogTitle": "Medium",
+            "creators": [
+                {
+                    "name": "Kent Beck",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "3X"
+                },
+                {
+                    "tag": "facebook"
+                }
+            ],
+            "collections": [],
+            "relations": {
+                "dc:relation": ["http://zotero.org/users/100000/items/NCC4WL24"]
+            },
+            "dateAdded": "2020-12-18T11:17:00Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "CLLZYEKV",
+        "version": 4127,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/CLLZYEKV",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/CLLZYEKV",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/P3LVAGN7",
+                "type": "application/json",
+                "attachmentType": "application/pdf",
+                "attachmentSize": 2663661
+            }
+        },
+        "meta": {
+            "creatorSummary": "Daniel Goleman",
+            "parsedDate": "2000-03-01",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "CLLZYEKV",
+            "version": 4127,
+            "itemType": "magazineArticle",
+            "title": "Leadership That Gets Results",
+            "abstractNote": "New research suggests that the most effective executives use a collection of distinct leadership styles—each in the right measure, at just the right time. Such flexibility is tough to put into action, but it pays off in performance. And better yet, it can be learned.",
+            "date": "1 March 2000",
+            "libraryCatalog": "hbr.org",
+            "url": "https://hbr.org/2000/03/leadership-that-gets-results",
+            "accessDate": "2020-12-15T23:36:37Z",
+            "extra": "Section: Emotional intelligence",
+            "publicationTitle": "Harvard Business Review",
+            "ISSN": "0017-8012",
+            "creators": [
+                {
+                    "name": "Daniel Goleman",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "management"
+                },
+                {
+                    "tag": "leadership"
+                },
+                {
+                    "tag": "emotional intelligence"
+                }
+            ],
+            "collections": [],
+            "relations": {},
+            "dateAdded": "2020-12-15T23:36:37Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "IC2Y3KEB",
+        "version": 4127,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/IC2Y3KEB",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/IC2Y3KEB",
+                "type": "text/html"
+            }
+        },
+        "meta": {
+            "creatorSummary": "Peterson et al.",
+            "parsedDate": "2020-12-11",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "IC2Y3KEB",
+            "version": 4127,
+            "itemType": "journalArticle",
+            "title": "How to Develop Your Leadership Style",
+            "abstractNote": "Bosses often sense that something is missing in an employee’s tool kit but can’t put a finger on what it is. They say something like “You need certain important intangibles” or “You don’t have enough gravitas,” but they fail to provide advice or guidance. What they’re talking about is leadership style. In every interaction, we send signals to others that fall into two categories: power and attractiveness. Powerful markers are associated with confidence, competence, charisma, and influence but also arrogance, abrasiveness, and intimidation. Attractiveness markers are related to agreeableness, approachability, and likability but also diffidence, lack of confidence, and submissiveness. The more consistent our signals, the more distinctive our style. This practical guide offers concrete advice for developing a dynamic and effective leadership style that draws from both types of markers for maximum impact.  INSET: The Culture Effect.",
+            "date": "2020/11//Nov/Dec2020",
+            "libraryCatalog": "EBSCOhost",
+            "volume": "98",
+            "pages": "68-77",
+            "publicationTitle": "Harvard Business Review",
+            "issue": "6",
+            "journalAbbreviation": "Harvard Business Review",
+            "ISSN": "00178012",
+            "creators": [
+                {
+                    "firstName": "Suzanne J.",
+                    "lastName": "Peterson",
+                    "creatorType": "author"
+                },
+                {
+                    "firstName": "Robin",
+                    "lastName": "Abramson",
+                    "creatorType": "author"
+                },
+                {
+                    "firstName": "R.k.",
+                    "lastName": "Stutman",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "management"
+                },
+                {
+                    "tag": "leadership"
+                }
+            ],
+            "collections": [],
+            "relations": {},
+            "dateAdded": "2020-12-17T23:11:38Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "84MG4CPK",
+        "version": 4127,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/84MG4CPK",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/84MG4CPK",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/GWLKA35S",
+                "type": "application/json",
+                "attachmentType": "application/pdf",
+                "attachmentSize": 1160859
+            }
+        },
+        "meta": {
+            "creatorSummary": "Schmidhuber",
+            "parsedDate": "2015-01",
+            "numChildren": 3
+        },
+        "data": {
+            "key": "84MG4CPK",
+            "version": 4127,
+            "itemType": "journalArticle",
+            "title": "Deep Learning in Neural Networks: An Overview",
+            "abstractNote": "In recent years, deep artificial neural networks (including recurrent ones) have won numerous contests in pattern recognition and machine learning. This historical survey compactly summarises relevant work, much of it from the previous millennium. Shallow and deep learners are distinguished by the depth of their credit assignment paths, which are chains of possibly learnable, causal links between actions and effects. I review deep supervised learning (also recapitulating the history of backpropagation), unsupervised learning, reinforcement learning & evolutionary computation, and indirect search for short programs encoding deep and large networks.",
+            "date": "01/2015",
+            "shortTitle": "Deep Learning in Neural Networks",
+            "libraryCatalog": "arXiv.org",
+            "url": "http://arxiv.org/abs/1404.7828",
+            "accessDate": "2021-06-09T16:19:57Z",
+            "extra": "arXiv: 1404.7828",
+            "volume": "61",
+            "pages": "85-117",
+            "publicationTitle": "Neural Networks",
+            "DOI": "10.1016/j.neunet.2014.09.003",
+            "journalAbbreviation": "Neural Networks",
+            "ISSN": "08936080",
+            "creators": [
+                {
+                    "firstName": "Juergen",
+                    "lastName": "Schmidhuber",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "artificial intelligence"
+                },
+                {
+                    "tag": "computer science"
+                },
+                {
+                    "tag": "machine learning"
+                }
+            ],
+            "collections": [],
+            "relations": {},
+            "dateAdded": "2021-06-09T16:19:57Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "3SGWRPS6",
+        "version": 4128,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/3SGWRPS6",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/3SGWRPS6",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/AP2G7KBU",
+                "type": "application/json",
+                "attachmentType": "application/pdf",
+                "attachmentSize": 290535
+            }
+        },
+        "meta": {
+            "creatorSummary": "Rozanski and Woods",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "3SGWRPS6",
+            "version": 4128,
+            "itemType": "journalArticle",
+            "title": "Applying Viewpoints and Views to Software Architecture",
+            "abstractNote": "Today’s large information systems are often extremely complex, and can contain millions of lines of code, thousands of database tables, and hundreds of components, all running on dozens of computers. Such systems demand that their architects make an almost overwhelming number of decisions, including deciding on the system’s functional structure, its internal and external interfaces, the information to be stored, managed and presented, the physical deployment environment, the development environment and how the system should be operated and supported.",
+            "language": "en",
+            "libraryCatalog": "Zotero",
+            "pages": "11",
+            "creators": [
+                {
+                    "firstName": "Nick",
+                    "lastName": "Rozanski",
+                    "creatorType": "author"
+                },
+                {
+                    "firstName": "Eoin",
+                    "lastName": "Woods",
+                    "creatorType": "author"
+                }
+            ],
+            "tags": [
+                {
+                    "tag": "architecture"
+                }
+            ],
+            "collections": [],
+            "relations": {
+                "dc:relation": [
+                    "http://zotero.org/users/100000/items/9MLM27FG",
+                    "http://zotero.org/users/100000/items/UBECBQ5I"
+                ]
+            },
+            "dateAdded": "2020-12-19T22:21:43Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    },
+    {
+        "key": "F5M4GRRW",
+        "version": 4128,
+        "library": {
+            "type": "user",
+            "id": 100000,
+            "name": "My Library",
+            "links": {
+                "self": {
+                    "href": "http://localhost:23119/api/users/100000",
+                    "type": "application/json"
+                },
+                "alternate": {
+                    "href": "https://www.zotero.org/users/100000",
+                    "type": "text/html"
+                }
+            }
+        },
+        "links": {
+            "self": {
+                "href": "http://localhost:23119/api/users/100000/items/F5M4GRRW",
+                "type": "application/json"
+            },
+            "alternate": {
+                "href": "https://www.zotero.org/users/100000/items/F5M4GRRW",
+                "type": "text/html"
+            },
+            "attachment": {
+                "href": "http://localhost:23119/api/users/100000/items/9936E5UM",
+                "type": "application/json",
+                "attachmentType": "text/html",
+                "attachmentSize": 2580061
+            }
+        },
+        "meta": {
+            "parsedDate": "2021-01-05",
+            "numChildren": 1
+        },
+        "data": {
+            "key": "F5M4GRRW",
+            "version": 4128,
+            "itemType": "magazineArticle",
+            "title": "Productivity Is About Your Systems, Not Your People",
+            "abstractNote": "Four ways to improve efficiency at the organizational level.",
+            "date": "2021-01-05T13:35:34Z",
+            "libraryCatalog": "hbr.org",
+            "url": "https://hbr.org/2021/01/productivity-is-about-your-systems-not-your-people",
+            "accessDate": "2021-01-24T21:24:03Z",
+            "extra": "Section: Collaboration",
+            "publicationTitle": "Harvard Business Review",
+            "ISSN": "0017-8012",
+            "creators": [],
+            "tags": [
+                {
+                    "tag": "productivity"
+                },
+                {
+                    "tag": "management"
+                }
+            ],
+            "collections": [],
+            "relations": {},
+            "dateAdded": "2021-01-24T21:24:03Z",
+            "dateModified": "2024-10-26T14:41:44Z"
+        }
+    }
+]

@@ -13,6 +13,12 @@ export interface ZoteroRawItem {
     };
 }
 
+type structuredDate = {
+    year: number,
+    month: number,
+    day: number,
+}
+
 /** @public */
 export class ZoteroItem {
     raw: ZoteroRawItem;
@@ -58,8 +64,9 @@ export class ZoteroItem {
         return this.raw.data.creators || [];
     }
 
-    getDate() {
+    getDate(): structuredDate {
         let date = this.raw.data.date;
+        const noDate: structuredDate = { year: null, month: null, day: null };
 
         if (
             this.raw.hasOwnProperty("meta") &&
@@ -69,8 +76,8 @@ export class ZoteroItem {
         }
 
         return date
-            ? this.formatDate(date)
-            : { year: null, month: null, day: null };
+            ? this.formatDate(date, noDate)
+            : noDate;
     }
 
     normalizeName(creator: any) {
@@ -92,11 +99,12 @@ export class ZoteroItem {
         return names;
     }
 
-    formatDate(date: string) {
+    formatDate(date: string, noDate: structuredDate): structuredDate {
         const dateObject = new Date(date);
 
+        // check on invalid date
         if (isNaN(dateObject.getTime())) {
-            return null;
+            return noDate;
         }
 
         return {

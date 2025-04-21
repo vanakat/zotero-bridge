@@ -1,0 +1,196 @@
+[
+    {
+        "key": "7EH9HZXV",
+        "version": 446,
+        "itemType": "magazineArticle",
+        "title": "Cultivating Everyday Courage: Short text is here",
+        "abstractNote": "Strategies for cultivating everyday courage at work.",
+        "date": "1 Nov 2018",
+        "shortTitle": "Hello people",
+        "libraryCatalog": "hbr.org",
+        "url": "https://hbr.org/2018/11/cultivating-everyday-courage",
+        "accessDate": "2020-12-15T23:38:50Z",
+        "extra": "Section: Managing yourself",
+        "publicationTitle": "Harvard Business Review",
+        "ISSN": "0017-8012",
+        "creators": [
+            {
+                "name": "James R. Detert",
+                "creatorType": "author"
+            }
+        ],
+        "tags": [
+            {
+                "tag": "management"
+            },
+            {
+                "tag": "leadership"
+            }
+        ],
+        "collections": [],
+        "relations": {},
+        "dateAdded": "2020-12-15T23:38:50Z",
+        "dateModified": "2024-10-26T14:29:23Z"
+    },
+    {
+        "key": "AC48EKUW",
+        "version": 445,
+        "itemType": "magazineArticle",
+        "title": "What Great Managers Do",
+        "abstractNote": "Great leaders tap into the needs and fears we all share. Great managers, by contrast, perform their magic by discovering, developing, and celebrating what’s different about each person who works for them. Here’s how they do it.",
+        "date": "1 March 2005",
+        "libraryCatalog": "hbr.org",
+        "url": "https://hbr.org/2005/03/what-great-managers-do",
+        "accessDate": "2020-12-15T23:29:37Z",
+        "extra": "Section: Managing people",
+        "publicationTitle": "Harvard Business Review",
+        "ISSN": "0017-8012",
+        "creators": [
+            {
+                "firstName": "Marcus",
+                "lastName": "Buckingham",
+                "creatorType": "author"
+            }
+        ],
+        "tags": [
+            {
+                "tag": "management"
+            },
+            {
+                "tag": "leadership"
+            }
+        ],
+        "collections": [],
+        "relations": {},
+        "dateAdded": "2020-12-15T23:29:37Z",
+        "dateModified": "2021-11-05T20:58:23Z"
+    },
+    {
+        "key": "XH2CL4AJ",
+        "version": 444,
+        "itemType": "magazineArticle",
+        "title": "Are You Solving the Right Problems?",
+        "abstractNote": "In surveys of 106 C-suite executives representing 91 private- and public-sector companies from 17 countries, the author found that a full 85% agreed that their organizations were bad at problem diagnosis, and 87% agreed that this flaw carried significant costs. Fewer than one in 10 said they were unaffected by the issue. What they struggle with, it turns out, is not solving problems but figuring out what the problems are. And creative solutions nearly always come from an alternative explanation for—or a reframing of—your problem.\n\nThe point of reframing is not to find the “real” problem but, rather, to see if there is a better problem to solve. The author outlines seven practices for effective reframing: (1) Establish legitimacy. (2) Bring outsiders into the discussion. (3) Get people’s definitions in writing. (4) Ask what’s missing. (5) Consider multiple categories. (6) Analyze positive exceptions. (7) Question the objective.",
+        "date": "2017-01-01T05:00:00Z",
+        "language": "English",
+        "libraryCatalog": "hbr.org",
+        "url": "https://hbr.org/2017/01/are-you-solving-the-right-problems",
+        "accessDate": "2020-12-14T21:48:04Z",
+        "extra": "Section: Managing organizations",
+        "publicationTitle": "Harvard Business Review",
+        "issue": "January–February 2017",
+        "ISSN": "0017-8012",
+        "creators": [
+            {
+                "name": "Thomas Wedell-Wedellsborg",
+                "creatorType": "author"
+            }
+        ],
+        "tags": [
+            {
+                "tag": "status/finished"
+            },
+            {
+                "tag": "management"
+            }
+        ],
+        "collections": [],
+        "relations": {},
+        "dateAdded": "2020-12-14T21:48:04Z",
+        "dateModified": "2021-11-05T20:57:56Z"
+    },
+    {
+        "key": "UBECBQ5I",
+        "version": 441,
+        "itemType": "journalArticle",
+        "title": "Views and Viewpoints in Software Systems Architecture",
+        "abstractNote": "Although the use of multiple views is a virtual holy grail of software and systems engineering, its status appears less secure in the ﬁeld known as Software Architecture. Yet, practicing architects need views to manage the inherent complexity of the large, software-intensive systems they specify and build. This paper begins with a brief survey of the topic from its historical origins through current usage and issues, and ends with an overview of an approach to treating views as ﬁrst-class entities within architectural description with respect to their usage in architectural speciﬁcation, analysis and evolution.",
+        "language": "en",
+        "libraryCatalog": "Zotero",
+        "pages": "10",
+        "creators": [
+            {
+                "name": "Rich Hilliard",
+                "creatorType": "author"
+            }
+        ],
+        "tags": [
+            {
+                "tag": "architecture"
+            }
+        ],
+        "collections": [],
+        "relations": {
+            "dc:relation": [
+                "http://zotero.org/users/8111159/items/3SGWRPS6",
+                "http://zotero.org/users/8111159/items/9MLM27FG"
+            ]
+        },
+        "dateAdded": "2020-12-15T22:05:13Z",
+        "dateModified": "2021-11-05T20:56:39Z"
+    },
+    {
+        "key": "9MLM27FG",
+        "version": 441,
+        "itemType": "journalArticle",
+        "title": "System-of-Systems Viewpoint for System Architecture Documentation",
+        "abstractNote": "Context: The systems comprising a system of systems (SoS) are inde- pendently acquired, operated, and managed. Frequently, the architecture documentation of these existing systems addresses only a stand-alone perspective, and must be augmented to address concerns that arise in the integrated SoS. Objective: We evaluated an architecture documentation viewpoint to address the concerns of a SoS architect about a constituent system, to support SoS design and analysis involving that constituent system. Method: We performed an expert review of documentation produced by applying the viewpoint to a system, using the active review method. Results: The expert panel was able to used a view constructed using the baseline version of the viewpoint to answer questions related to all SoS architect concerns about a constituent system, except for questions concerning the interaction of the constituent system with the platform and network infrastructure. Conclusions: We found that the expert panel was unable to answer certain questions because the baseline version of the viewpoint had a gap in coverage related to relationship of software units of execution (e.g., processes or services) to computers and networks. The viewpoint was revised to add a Deployment Model to address these concerns, and is included in an appendix.",
+        "date": "21 January 2018",
+        "libraryCatalog": "arXiv.org",
+        "url": "http://arxiv.org/abs/1801.06837",
+        "accessDate": "2020-12-19T22:23:53Z",
+        "extra": "arXiv: 1801.06837",
+        "publicationTitle": "arXiv:1801.06837 [cs]",
+        "creators": [
+            {
+                "firstName": "John",
+                "lastName": "Klein",
+                "creatorType": "author"
+            },
+            {
+                "firstName": "Hans",
+                "lastName": "van Vliet",
+                "creatorType": "author"
+            }
+        ],
+        "tags": [
+            {
+                "tag": "architecture"
+            }
+        ],
+        "collections": [],
+        "relations": {
+            "dc:relation": [
+                "http://zotero.org/users/8111159/items/3SGWRPS6",
+                "http://zotero.org/users/8111159/items/UBECBQ5I"
+            ]
+        },
+        "dateAdded": "2020-12-19T22:23:53Z",
+        "dateModified": "2021-11-05T20:56:17Z"
+    },
+    {
+        "key": "T52QYU6J",
+        "version": 224,
+        "itemType": "encyclopediaArticle",
+        "title": "Edsel",
+        "abstractNote": "Edsel is a defunct automobile brand of Ford Motor Company that sold automobiles from the 1958 to the 1960 model years.  Officially designated as a third brand of the Lincoln-Mercury Division (re-christened the Mercury-Edsel-Lincoln Division), Edsel (deriving its name from Edsel Ford) was intended to give Ford a fourth brand, allowing the company to gain additional market share between General Motors and Chrysler.  In a similar fashion to Buick, Oldsmobile, and Pontiac (and Dodge and DeSoto), Edsel and Mercury shared a similar price range; the division shared bodies with both Ford and Mercury.  \nAs Edsel marked the first launch of a new brand by a major American automaker since Mercury in 1939, Ford invested heavily in a year long advertising campaign leading consumers to believe that Edsels were the cars of the future.  While its model lines introduced several advanced features for its price segment, the 1958 launch of Edsel would become a symbol of a commercial failure.  Introduced in a recession that catastrophically affected sales of medium-priced cars, Edsels were considered overhyped, unattractive (distinguished by a vertical grille), and low quality.  \nFollowing a loss of over $250 million on development, manufacturing, and marketing on the model line,  Ford quietly discontinued the Edsel brand before 1960.",
+        "date": "1 Dec 2020",
+        "language": "en",
+        "libraryCatalog": "Wikipedia",
+        "url": "https://en.wikipedia.org/w/index.php?title=Edsel&oldid=991657389",
+        "accessDate": "2020-12-21T11:15:07Z",
+        "rights": "Creative Commons Attribution-ShareAlike License",
+        "extra": "Page Version ID: 991657389",
+        "encyclopediaTitle": "Wikipedia",
+        "creators": [],
+        "tags": [
+            {
+                "tag": "status/finished"
+            }
+        ],
+        "collections": [],
+        "relations": {},
+        "dateAdded": "2020-12-21T11:15:07Z",
+        "dateModified": "2021-10-12T22:58:41Z"
+    }
+]

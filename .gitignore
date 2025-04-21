@@ -9,3 +9,6 @@ types
 
 # obsidian
 data.json
+
+# tests
+coverage

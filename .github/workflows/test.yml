@@ -1,0 +1,41 @@
+name: Run Tests
+
+on:
+    # Trigger the workflow on push events but only for the main/master branches
+    push:
+        branches: [main]
+    # Trigger the workflow on pull request events targeted at the main/master branches
+    pull_request:
+        branches: [main]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            ##################
+            # Checkout code from the pull request
+            ###################
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            ##################
+            # Setup Node.js environment
+            ###################
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+                  cache: "npm"
+
+            ##################
+            # Install dependencies
+            ###################
+            - name: Install dependencies
+              run: npm ci
+
+            ##################
+            # Run tests
+            ###################
+            - name: Run tests
+              run: npm test
