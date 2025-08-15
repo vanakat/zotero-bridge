@@ -71,6 +71,11 @@ describe("ZoteroItem", () => {
             const item = new ZoteroItem(createMockItem({ title: "", shortTitle: "" }));
             expect(item.getTitle()).toBe("[No Title]");
         });
+
+        it("should return '[No Title]' if title is null and shortTitle is missing", () => {
+            const item = new ZoteroItem(createMockItem({ title: null as any }));
+            expect(item.getTitle()).toBe("[No Title]");
+        });
     });
 
     describe("getShortTitle()", () => {
@@ -142,6 +147,15 @@ describe("ZoteroItem", () => {
             const item2 = new ZoteroItem(createMockItem({})); // No creators field
             expect(item2.getCreatorSummary()).toBe("");
         });
+
+        it("should fallback to first author if meta.creatorSummary property exists but is explicitly undefined", () => {
+            const item = new ZoteroItem(createMockItem(
+                { creators: [{ firstName: "John", lastName: "Doe", creatorType: "author" }] },
+                { creatorSummary: undefined }
+            ));
+            // New behavior: fallback to the first author's full name when creatorSummary is undefined
+            expect(item.getCreatorSummary()).toBe("John Doe");
+        });
     });
 
     describe("getCreators()", () => {
@@ -161,6 +175,11 @@ describe("ZoteroItem", () => {
 
         it("should return an empty array if creators field is missing", () => {
             const item = new ZoteroItem(createMockItem({}));
+            expect(item.getCreators()).toEqual([]);
+        });
+
+        it("should return an empty array if creators is null", () => {
+            const item = new ZoteroItem(createMockItem({ creators: null as any }));
             expect(item.getCreators()).toEqual([]);
         });
     });
@@ -195,24 +214,40 @@ describe("ZoteroItem", () => {
             expect(zotero7SampleItem.getAuthors()).toEqual([{ firstName: "R", lastName: "Westrum", fullName: "R Westrum" }]);
         });
 
-        it("should handle missing firstName or lastName", () => {
+        it("should handle missing firstName or lastName without 'undefined' in fullName", () => {
             const item1 = new ZoteroItem(createMockItem({ creators: [{ lastName: "Doe", creatorType: "author" }] }));
             const item2 = new ZoteroItem(createMockItem({ creators: [{ firstName: "Jane", creatorType: "author" }] }));
-            // Note: The current logic defaults missing names to undefined, resulting in "undefined Doe" or "Jane undefined"
-            // This might be undesirable, but we test the current behaviour.
-            expect(item1.getAuthors()).toEqual([{ firstName: undefined, lastName: "Doe", fullName: "undefined Doe" }]);
-            expect(item2.getAuthors()).toEqual([{ firstName: "Jane", lastName: undefined, fullName: "Jane undefined" }]);
+            expect(item1.getAuthors()).toEqual([{ firstName: undefined, lastName: "Doe", fullName: "Doe" }]);
+            expect(item2.getAuthors()).toEqual([{ firstName: "Jane", lastName: undefined, fullName: "Jane" }]);
         });
 
-        it("should handle empty firstName or lastName strings", () => {
+        it("should handle empty firstName or lastName strings without extra spaces or 'undefined'", () => {
             const item = new ZoteroItem(createMockItem({ creators: [{ firstName: "", lastName: "Doe", creatorType: "author" }] }));
-            expect(item.getAuthors()).toEqual([{ firstName: "", lastName: "Doe", fullName: " Doe" }]); // Note the leading space in fullName
+            expect(item.getAuthors()).toEqual([{ firstName: "", lastName: "Doe", fullName: "Doe" }]);
         });
 
         it("should handle empty 'name' field", () => {
             const item = new ZoteroItem(createMockItem({ creators: [{ name: "", creatorType: "author" }] }));
             // No space -> delimiter -1. firstName="", lastName="", fullName=""
             expect(item.getAuthors()).toEqual([{ firstName: "", lastName: "", fullName: "" }]);
+        });
+
+        it("should split a three-part name at the last space", () => {
+            const item = new ZoteroItem(createMockItem({ creators: [{ name: "John Ronald Tolkien", creatorType: "author" }] }));
+            expect(item.getAuthors()).toEqual([{ firstName: "John Ronald", lastName: "Tolkien", fullName: "John Ronald Tolkien" }]);
+        });
+
+        it("should trim excess whitespace around names", () => {
+            const item = new ZoteroItem(createMockItem({ creators: [{ name: "  Ada   Lovelace  ", creatorType: "author" }] }));
+            expect(item.getAuthors()).toEqual([{ firstName: "Ada", lastName: "Lovelace", fullName: "Ada   Lovelace" }]);
+        });
+
+        it("should prefer 'name' over first/last when both are present on a creator", () => {
+            const item = new ZoteroItem(createMockItem({
+                creators: [{ name: "Ada Lovelace", firstName: "Ada", lastName: "Byron", creatorType: "author" }]
+            }));
+            // Current logic checks for 'name' first and derives first/last from it, ignoring firstName/lastName fields
+            expect(item.getAuthors()).toEqual([{ firstName: "Ada", lastName: "Lovelace", fullName: "Ada Lovelace" }]);
         });
     });
 
@@ -377,6 +412,33 @@ describe("ZoteroItem", () => {
 
             const item2 = new ZoteroItem(createMockItem({ date: null }, { parsedDate: null }));
             expect(item2.getDate()).toEqual({ year: null, month: null, day: null });
+        });
+
+        it("should fallback to data.date if meta.parsedDate property exists but is undefined", () => {
+            const item = new ZoteroItem(createMockItem(
+                { date: "2022-08-20" },
+                { parsedDate: undefined }
+            ));
+            // New behavior: meta.parsedDate invalid/undefined -> fallback to data.date
+            expect(item.getDate()).toEqual({ year: 2022, month: 8, day: 20 });
+        });
+
+        it("should fallback to data.date if meta.parsedDate is an empty string", () => {
+            const item = new ZoteroItem(createMockItem(
+                { date: "2022-08-20" },
+                { parsedDate: "" as any }
+            ));
+            // New behavior: empty parsedDate -> fallback to data.date
+            expect(item.getDate()).toEqual({ year: 2022, month: 8, day: 20 });
+        });
+
+        it("should fallback to data.date when meta.parsedDate exists but is invalid", () => {
+            const item = new ZoteroItem(createMockItem(
+                { date: "2022-08-20" },
+                { parsedDate: "invalid meta date" }
+            ));
+            // New behavior: invalid parsedDate -> fallback to data.date
+            expect(item.getDate()).toEqual({ year: 2022, month: 8, day: 20 });
         });
     });
 

@@ -44,10 +44,12 @@ export class ZoteroItem {
             this.raw.hasOwnProperty("meta") &&
             this.raw.meta.hasOwnProperty("creatorSummary")
         ) {
-            return this.raw.meta.creatorSummary;
-        } else {
-            return this.getAuthor() ? this.getAuthor().fullName : '';
+            const summary = this.raw.meta.creatorSummary as any;
+            if (summary !== undefined && summary !== null) {
+                return summary;
+            }
         }
+        return this.getAuthor() ? this.getAuthor().fullName : '';
     }
 
     getAuthors() {
@@ -65,19 +67,21 @@ export class ZoteroItem {
     }
 
     getDate(): structuredDate {
-        let date = this.raw.data.date;
         const noDate: structuredDate = { year: null, month: null, day: null };
 
-        if (
-            this.raw.hasOwnProperty("meta") &&
-            this.raw.meta.hasOwnProperty("parsedDate")
-        ) {
-            date = this.raw.meta.parsedDate;
+        // Prefer meta.parsedDate when present and valid; fallback to data.date
+        if (this.raw.hasOwnProperty("meta") && this.raw.meta.hasOwnProperty("parsedDate")) {
+            const parsedFromMeta = this.formatDate(this.raw.meta.parsedDate as any, noDate);
+            if (parsedFromMeta.year !== null) {
+                return parsedFromMeta;
+            }
         }
 
-        return date
-            ? this.formatDate(date, noDate)
-            : noDate;
+        if (this.raw.data.date) {
+            return this.formatDate(this.raw.data.date, noDate);
+        }
+
+        return noDate;
     }
 
     normalizeName(creator: any) {
@@ -88,18 +92,32 @@ export class ZoteroItem {
         };
 
         if (creator.hasOwnProperty('name')) {
-            const delimiter = creator.name.lastIndexOf(' ');
-            names.firstName = creator.name.substring(0, delimiter + 1).trim();
-            names.lastName = creator.name.substring(delimiter).trim();
-            names.fullName = creator.name;
+            const trimmedName = creator.name.trim();
+            const delimiter = trimmedName.lastIndexOf(' ');
+            if (delimiter === -1) {
+                // No space found, treat entire name as lastName
+                names.firstName = '';
+                names.lastName = trimmedName;
+            } else {
+                names.firstName = trimmedName.substring(0, delimiter).trim();
+                names.lastName = trimmedName.substring(delimiter + 1).trim();
+            }
+            names.fullName = trimmedName;
         } else {
-            names.fullName = `${names.firstName} ${names.lastName}`;
+            // Build full name from available parts only to avoid "undefined"/extra spaces
+            const parts = [names.firstName, names.lastName].filter(part => part);
+            names.fullName = parts.join(' ');
         }
 
         return names;
     }
 
-    formatDate(date: string, noDate: structuredDate): structuredDate {
+    formatDate(date: string | null, noDate: structuredDate): structuredDate {
+        // Handle null/undefined dates
+        if (date === null || date === undefined) {
+            return noDate;
+        }
+
         const dateObject = new Date(date);
 
         // check on invalid date
