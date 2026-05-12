@@ -50,7 +50,8 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
         return request({
             url: `http://${this.settings.host}:${this.settings.port}/api/users/0/groups`,
             method: 'get',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            headers: { "Zotero-Allowed-Request": "true" }
         })
             .then(JSON.parse)
             .then((groups: any[]) => groups.map(group => group.data));
@@ -60,7 +61,8 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
         return request({
             url: `${this.baseUrl}/items?` + new URLSearchParams(parameters).toString(),
             method: 'get',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            headers: { "Zotero-Allowed-Request": "true" }
         })
             .then(JSON.parse)
             .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.data.itemType)).map(item => new ZoteroItem(item)))
