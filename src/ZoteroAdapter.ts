@@ -1,4 +1,5 @@
 import { request, Notice } from 'obsidian';
+import * as http from 'http';
 import { ZoteroBridgeSettings } from './ZoteroBridgeSettings';
 import { ZoteroItem } from './ZoteroItem';
 import { ZoteroBridgeConnectionType } from './ZoteroBridgeSettings'
@@ -11,6 +12,43 @@ type ZoteroItemsRequestParameters = {
     since?: string,
     sort?: string,
     q?: string
+}
+
+function localApiRequest(url: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const req = http.get(url, {
+            headers: {
+                'Accept': 'application/json',
+                'User-Agent': 'ZoteroBridge/1.6.6',
+            },
+        }, response => {
+            let body = '';
+
+            response.setEncoding('utf8');
+            response.on('data', chunk => body += chunk);
+            response.on('end', () => {
+                if (!response.statusCode || response.statusCode < 200 || response.statusCode >= 300) {
+                    reject(new Error(`Zotero Local API returned HTTP ${response.statusCode}: ${body}`));
+                    return;
+                }
+
+                resolve(body);
+            });
+        });
+
+        req.on('error', reject);
+        req.setTimeout(5000, () => {
+            req.destroy(new Error('Zotero Local API request timed out'));
+        });
+    });
+}
+
+function localApiRequestWithFallback(url: string): Promise<string> {
+    return request({
+        url,
+        method: 'get',
+        contentType: 'application/json'
+    }).catch(() => localApiRequest(url));
 }
 
 /**
@@ -47,21 +85,13 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
     }
 
     groups(): Promise<any[]> {
-        return request({
-            url: `http://${this.settings.host}:${this.settings.port}/api/users/0/groups`,
-            method: 'get',
-            contentType: 'application/json'
-        })
+        return localApiRequestWithFallback(`http://${this.settings.host}:${this.settings.port}/api/users/0/groups`)
             .then(JSON.parse)
             .then((groups: any[]) => groups.map(group => group.data));
     }
 
     items(parameters: ZoteroItemsRequestParameters): Promise<ZoteroItem[]> {
-        return request({
-            url: `${this.baseUrl}/items?` + new URLSearchParams(parameters).toString(),
-            method: 'get',
-            contentType: 'application/json'
-        })
+        return localApiRequestWithFallback(`${this.baseUrl}/items?` + new URLSearchParams(parameters).toString())
             .then(JSON.parse)
             .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.data.itemType)).map(item => new ZoteroItem(item)))
             .catch(() => {

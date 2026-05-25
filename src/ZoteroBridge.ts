@@ -22,6 +22,7 @@ export class ZoteroBridge extends Plugin {
 
     async saveSettings(newSettings: Partial<ZoteroBridgeSettings>) {
         Object.assign(this.settings, newSettings);
+        this.zoteroAdapter = new ZoteroAdapters[this.settings.connectionType](this.settings);
         await this.saveData(this.settings);
     }
 }
