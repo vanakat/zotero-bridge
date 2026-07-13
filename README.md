@@ -12,6 +12,14 @@ Enable Local API feature in settings: `Settings > Advanced > Allow other applica
 
 Install Zotero addon [ZotServer](https://github.com/MunGell/ZotServer)
 
+## Configuration
+
+The plugin settings screen provides the following options:
+
+* **Connection type** – `Zotero 6 ZotServer Plugin` or `Zotero 7 Local API (v3)`
+* **User or group** – which library to search: your personal library or one of your group libraries (Zotero 7 connection type only)
+* **Zotero server port** – defaults to `23119`; don't change unless you really know what you are doing
+
 ## How to use
 
 Zotero Bridge provides APIs for other plugins to connect to Zotero.
@@ -19,6 +27,16 @@ Zotero Bridge provides APIs for other plugins to connect to Zotero.
 Example of such consumer plugin is [Zotero Link](https://github.com/vanakat/zotero-link).
 
 APIs of this plugin are published with Obsidian [plugin api](https://github.com/vanakat/plugin-api) library and can be used anywhere in Obsidian.
+
+`PluginApi.ZoteroBridge.v1().search()` opens a search modal and returns a promise that resolves with the selected `ZoteroItem`. Its `getValues()` method returns an object with the following properties, ready for use in templates:
+
+* `key` – Zotero item key
+* `title` – item title
+* `shortTitle` – item short title
+* `date` – structured date object with `year`, `month` and `day` properties
+* `authors` – array of authors, each with `firstName`, `lastName` and `fullName`
+* `firstAuthor` – first author of the item
+* `creatorSummary` – creator summary as displayed by Zotero, e.g. "Smith and Jones"
 
 Example use of Zotero Bridge APIs in [Templater](https://github.com/SilentVoid13/Templater) [user scripts](https://silentvoid13.github.io/Templater/user-functions/script-user-functions.html):
 
@@ -49,10 +67,11 @@ _(this example is taken from https://github.com/vanakat/zotero-bridge/pull/2)_
 ## How to contribute
 
 1. Fork and clone this repository
-2. Link this directory to your plugins directory: `ln -sfn <this-directory> <your-test-vault>/.obsidian/plugins/obsidian-zotero`
+2. Link this directory to your plugins directory: `ln -sfn <this-directory> <your-test-vault>/.obsidian/plugins/zotero-bridge`
 3. `npm install` to install all dependencies
 4. `npm run dev` will run development server
 5. Reload your Obsidian with test vault open
+6. `npm test` runs the Jest test suite
 
 Please refer to following helpful resources:
 
