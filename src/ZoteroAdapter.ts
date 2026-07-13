@@ -19,7 +19,7 @@ function localApiRequest(url: string): Promise<string> {
         const req = http.get(url, {
             headers: {
                 'Accept': 'application/json',
-                'User-Agent': 'ZoteroBridge/1.6.6',
+                'User-Agent': 'ZoteroBridge',
             },
         }, response => {
             let body = '';
