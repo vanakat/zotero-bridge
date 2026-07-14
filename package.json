@@ -16,6 +16,10 @@
         "zotero",
         "obsidian plugin"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vanakat/zotero-bridge.git"
+    },
     "author": "Shmavon Gazanchyan",
     "license": "MIT",
     "devDependencies": {

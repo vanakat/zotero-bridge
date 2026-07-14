@@ -12,89 +12,41 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      # create the GitHub release
+      contents: write
+      # OIDC token for npm trusted publishing
+      id-token: write
+
     steps:
-    ##################
-    # Checkout code
-    ###################
     - uses: actions/checkout@v4
 
-    ##################
-    # Setup .npmrc file to publish to npm
-    # install dependencies, build and push to npm
-    ###################
     - uses: actions/setup-node@v4
       with:
-        node-version: '20.x'
+        # npm >= 11.5.1 is required for trusted publishing
+        node-version: '24.x'
         registry-url: 'https://registry.npmjs.org'
+    - name: Update npm
+      run: npm install -g npm@latest
+
     - name: Build
-      id: build
       run: |
         npm install
         npm run build
-        npm publish --access public
         mkdir ${{ env.PLUGIN_NAME }}
         cp main.js manifest.json styles.css ${{ env.PLUGIN_NAME }}
-        zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
-        ls
-        echo "::set-output name=tag_name::$(git tag --sort version:refname | tail -n 1)"
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        zip -r ${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.zip ${{ env.PLUGIN_NAME }}
 
-    ##################
-    # Create GitHub Release
-    ###################
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+    - name: Create GitHub release
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VERSION: ${{ github.ref }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        draft: false
-        prerelease: false
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        ASSETS="main.js manifest.json styles.css ${{ env.PLUGIN_NAME }}-${{ github.ref_name }}.zip"
+        gh release create "${{ github.ref_name }}" --title "${{ github.ref_name }}" --verify-tag $ASSETS \
+          || gh release upload "${{ github.ref_name }}" $ASSETS --clobber
 
-    ##################
-    # Upload artifacts to GitHub Release
-    ###################
-    - name: Upload zip file
-      id: upload-zip
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ env.PLUGIN_NAME }}.zip
-        asset_name: ${{ env.PLUGIN_NAME }}-${{ steps.build.outputs.tag_name }}.zip
-        asset_content_type: application/zip
-    - name: Upload main.js
-      id: upload-main
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./main.js
-        asset_name: main.js
-        asset_content_type: text/javascript
-    - name: Upload manifest.json
-      id: upload-manifest
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./manifest.json
-        asset_name: manifest.json
-        asset_content_type: application/json
-    - name: Upload styles.css
-      id: upload-styles
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./styles.css
-        asset_name: styles.css
-        asset_content_type: application/json
+    # Runs last so a registry/auth problem can never block the GitHub
+    # release, which is what Obsidian installs plugins from.
+    # Authenticated via npm trusted publishing (OIDC) — no token secret.
+    - name: Publish to npm
+      run: npm publish --access public
