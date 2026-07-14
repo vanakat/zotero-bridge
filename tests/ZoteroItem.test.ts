@@ -442,11 +442,39 @@ describe("ZoteroItem", () => {
         });
     });
 
+    describe("getLibraryUri()", () => {
+        it("should return 'library' for personal library items (Z7)", () => {
+            // zotero7 mock items carry library: { type: "user", ... }
+            expect(zotero7SampleItem.getLibraryUri()).toBe("library");
+        });
+
+        it("should return 'groups/<id>' for group library items", () => {
+            const item = new ZoteroItem({
+                library: { type: "group", id: 5959471 },
+                data: { key: "GRPITEM1" },
+            });
+            expect(item.getLibraryUri()).toBe("groups/5959471");
+        });
+
+        it("should fall back to 'library' when library info is missing (ZotServer)", () => {
+            expect(zotero6SampleItem.getLibraryUri()).toBe("library");
+        });
+
+        it("should fall back to 'library' when a group has no id", () => {
+            const item = new ZoteroItem({
+                library: { type: "group" },
+                data: { key: "GRPITEM2" },
+            });
+            expect(item.getLibraryUri()).toBe("library");
+        });
+    });
+
     describe("getValues()", () => {
         it("should return all values correctly for a typical Zotero 6 item", () => {
             const item = zotero6SampleItem; // Has title, shortTitle, author, date
             expect(item.getValues()).toEqual({
                 key: "7EH9HZXV",
+                libraryUri: "library",
                 title: "Cultivating Everyday Courage: Short text is here",
                 shortTitle: "Hello people",
                 date: { year: 2018, month: 11, day: 1 },
@@ -460,6 +488,7 @@ describe("ZoteroItem", () => {
             const item = zotero7SampleItem; // Has title, no shortTitle, author, date, meta.creatorSummary
             expect(item.getValues()).toEqual({
                 key: "8NNLV8L2",
+                libraryUri: "library",
                 title: "A typology of organisational cultures",
                 shortTitle: undefined, // Explicitly check for undefined
                 date: { year: 2001, month: 12, day: 1 },
@@ -473,6 +502,7 @@ describe("ZoteroItem", () => {
             const item = zotero6NoAuthorItem; // No authors, no date in mock (but date field exists)
             expect(item.getValues()).toEqual({
                 key: "T52QYU6J",
+                libraryUri: "library",
                 title: "Edsel",
                 shortTitle: undefined,
                 date: { year: 2020, month: 12, day: 1 }, // It *does* have a parsable date "1 Dec 2020"
@@ -486,6 +516,7 @@ describe("ZoteroItem", () => {
             const item = new ZoteroItem(createMockItem({ key: "SPARSE" }));
             expect(item.getValues()).toEqual({
                 key: "SPARSE",
+                libraryUri: "library",
                 title: "[No Title]",
                 shortTitle: undefined,
                 date: { year: null, month: null, day: null },

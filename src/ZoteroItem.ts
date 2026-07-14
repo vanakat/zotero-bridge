@@ -1,4 +1,8 @@
 export interface ZoteroRawItem {
+    library?: {
+        type?: string;
+        id?: number;
+    };
     meta?: {
         creatorSummary?: string;
         parsedDate?: string;
@@ -29,6 +33,19 @@ export class ZoteroItem {
 
     getKey() {
         return this.raw.data.key;
+    }
+
+    /**
+     * Library path for zotero:// URIs: `groups/<id>` for group library items,
+     * `library` (the personal library) otherwise. ZotServer responses carry no
+     * library information, so they fall back to the personal library.
+     */
+    getLibraryUri() {
+        const library = this.raw.library;
+        if (library && library.type === 'group' && library.id != null) {
+            return `groups/${library.id}`;
+        }
+        return 'library';
     }
 
     getTitle() {
@@ -135,6 +152,7 @@ export class ZoteroItem {
     getValues() {
         return {
             key: this.getKey(),
+            libraryUri: this.getLibraryUri(),
             title: this.getTitle(),
             shortTitle: this.getShortTitle(),
             date: this.getDate(),

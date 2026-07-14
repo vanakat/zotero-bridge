@@ -31,6 +31,7 @@ APIs of this plugin are published with Obsidian [plugin api](https://github.com/
 `PluginApi.ZoteroBridge.v1().search()` opens a search modal and returns a promise that resolves with the selected `ZoteroItem`. Its `getValues()` method returns an object with the following properties, ready for use in templates:
 
 * `key` – Zotero item key
+* `libraryUri` – library path for `zotero://` URIs: `groups/<id>` for group library items, `library` for the personal library
 * `title` – item title
 * `shortTitle` – item short title
 * `date` – structured date object with `year`, `month` and `day` properties
