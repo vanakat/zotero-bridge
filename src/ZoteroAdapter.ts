@@ -11,8 +11,12 @@ type ZoteroItemsRequestParameters = {
     include?: string,
     since?: string,
     sort?: string,
-    q?: string
+    q?: string,
+    limit?: string
 }
+
+// Cap suggestion results so large libraries don't hang the modal (vanakat/zotero-bridge#4, vanakat/zotero-link#22)
+export const SEARCH_RESULTS_LIMIT = 50;
 
 function localApiRequest(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -82,7 +86,8 @@ export class LocalAPIV3Adapter implements ZoteroAdapter {
     search(query: string) {
         return this.items({
             itemType: '-attachment',
-            q: query
+            q: query,
+            limit: SEARCH_RESULTS_LIMIT.toString()
         })
     }
 
@@ -133,7 +138,10 @@ export class ZotServerAdapter implements ZoteroAdapter {
             }])
         })
             .then(JSON.parse)
-            .then((items: any[]) => items.filter(item => !['attachment', 'note'].includes(item.itemType)).map(item => new ZoteroItem({ data: item })))
+            .then((items: any[]) => items
+                .filter(item => !['attachment', 'note'].includes(item.itemType))
+                .slice(0, SEARCH_RESULTS_LIMIT)
+                .map(item => new ZoteroItem({ data: item })))
             .catch(() => {
                 new Notice(`Couldn't connect to Zotero, please check the app is open and ZotServer is installed`);
                 return [];
