@@ -11,7 +11,7 @@ export interface ZoteroBridgeSettings {
 }
 
 export const DEFAULT_SETTINGS: Partial<ZoteroBridgeSettings> = {
-    connectionType: ZoteroBridgeConnectionType.ZotServer,
+    connectionType: ZoteroBridgeConnectionType.LocalAPIV3,
     userOrGroup: 'users/0',
     host: 'localhost',
     port: '23119',
