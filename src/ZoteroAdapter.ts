@@ -20,6 +20,7 @@ function localApiRequest(url: string): Promise<string> {
             headers: {
                 'Accept': 'application/json',
                 'User-Agent': 'ZoteroBridge',
+                'Zotero-Allowed-Request': 'true',
             },
         }, response => {
             let body = '';
@@ -47,7 +48,8 @@ function localApiRequestWithFallback(url: string): Promise<string> {
     return request({
         url,
         method: 'get',
-        contentType: 'application/json'
+        contentType: 'application/json',
+        headers: { 'Zotero-Allowed-Request': 'true' }
     }).catch(() => localApiRequest(url));
 }
 
